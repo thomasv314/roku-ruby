@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'roku/device'
+require 'roku/remote'
+
+require 'pry'
+
+if ENV['DEBUG']
+  binding.pry
+  puts "ya"
+else
+  Roku::Remote.start
+end
