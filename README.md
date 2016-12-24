@@ -3,6 +3,7 @@
 Use a terminal and vi key bindings to control a Roku TV or device on your local network.
 Uses ruby, curses, ssdp, and the Roku External Control API.
 
+[Full length preview](https://gfycat.com/UnfoldedSilkyDiscus)
 ![Preview Vim Roku](https://giant.gfycat.com/UnfoldedSilkyDiscus.gif)
 
 ## install
@@ -17,12 +18,12 @@ Run `./bin/roku-remote`, it will search for a Roku device on your network.
 
 Key bindings:
 ```
-        i               - info
-        h               - left arrow
-        j               - down arrow
-        l               - right arrow
-        k               - up arrow
-        /               - search
+        i                - info
+        h                - left arrow
+        j                - down arrow
+        l                - right arrow
+        k                - up arrow
+        /                - search
         p                - power on
         enter            - select
         escape           - home screen (or cancel vi movement)
