@@ -22,12 +22,12 @@ module Roku
         if repeat_action_times
           threads = []
           repeat_action_times.times do
-            threads << Thread.new { device.press(keypress.action) }
+            threads << Thread.new { device.press(keypress) }
           end
           threads.each(&:join)
           @repeat_action_times = nil
         else
-          device.press(keypress.action)
+          device.press(keypress)
         end
 
         return keypress.name

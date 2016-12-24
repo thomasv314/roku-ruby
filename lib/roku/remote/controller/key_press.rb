@@ -16,6 +16,7 @@ module Roku
           'l' => { name: 'Right Arrow', action: :right },
           'k' => { name: 'Up Arrow', action: :up },
           '/' => { name: 'Search', action: :search },
+          'p' => { name: 'Power On', method: :power_on  },
           ENTER => { name: 'Enter', action: :select },
           ESCAPE_KEY  => { name: 'Home', action: :home },
           BACKSPACE_KEY => { name: 'Back', action: :back }
@@ -44,6 +45,10 @@ module Roku
 
         def number
           hash[:number]
+        end
+
+        def method
+          hash[:method]
         end
 
         def invalid_cmd

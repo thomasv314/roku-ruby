@@ -38,7 +38,6 @@ module Roku
 
     def power_on
       Response.new(self.class.post('/launch/tvinput.hdm1'))
-      press(:home)
     end
 
     def info
@@ -47,8 +46,14 @@ module Roku
       res.struct_from_response_key('device_info')
     end
 
-    def press(action)
-      Response.new(self.class.post("/keypress/#{ACTIONS[action]}"))
+    def press(keypress)
+      if keypress.action
+        Response.new(self.class.post("/keypress/#{ACTIONS[keypress.action]}"))
+      elsif keypress.method
+        send(keypress.method)
+      else
+        raise ArgumentError, "UnsureWhatThatKeyPressIs"
+      end
     end
 
     def self.search_for_device
