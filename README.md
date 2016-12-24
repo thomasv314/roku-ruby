@@ -1,6 +1,7 @@
 # vim-rokutv-remote-control
 
 Use a terminal and vi key bindings to control a Roku TV or device on your local network.
+
 Uses ruby, curses, ssdp, and the Roku External Control API.
 
 Full length preview: [https://gfycat.com/UnfoldedSilkyDiscus](https://gfycat.com/UnfoldedSilkyDiscus)
