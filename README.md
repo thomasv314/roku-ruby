@@ -1,4 +1,4 @@
-# vim-rokutv-remote-control
+# Roku Ruby CLI Remote
 
 Use a terminal and vi-like key bindings to control a Roku TV or device on your local network.
 
@@ -6,17 +6,14 @@ Built with ruby, curses, ssdp, and the Roku External Control API.
 
 ![Preview Vim Roku](https://giant.gfycat.com/UnfoldedSilkyDiscus.gif)
 
-## install
+## Install / Usage
 ```
-git clone git@github.com:thomasv314/vim-rokutv-remote-control.git
-cd vim-rokutv-remote-control
-bundle install
-```
+$ gem install roku-ruby
+$ roku-remote
+``````
 
-## usage
-Run `./bin/roku-remote`, it will search for a Roku device on your network.
 
-Key bindings:
+## Key bindings:
 ```
         i                 info
         h                 left arrow
@@ -38,8 +35,7 @@ Key bindings:
 - only works with the first Roku device it finds on your network.. I only have one device to tests against, unsure what happens otherwise
 - search functionality is implemented per Roku docs instructions, doesnt work though
 - need a insert mode for text fields
-- need to write tests
-- power off isn't documented.. -.- 
+- power off isn't documented.. -.-
 - should highlight buttons on CLI screen when pressed
 - should highlight numeric keys when N command activated
 
