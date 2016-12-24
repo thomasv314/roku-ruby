@@ -1,36 +1,46 @@
-# Roku::Remote
+# vim-rokutv-remote-control
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/roku/remote`. To experiment with that code, run `bin/console` for an interactive prompt.
+Use a terminal and vi key bindings to control a Roku TV or device on your local network.
+Uses ruby, curses, ssdp, and the Roku External Control API.
 
-TODO: Delete this and the text above, and describe your gem
+![Preview Vim Roku](https://giant.gfycat.com/UnfoldedSilkyDiscus.gif)
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'roku-remote'
+## install
+```
+git clone git@github.com:thomasv314/vim-rokutv-remote-control.git
+cd vim-rokutv-remote-control
+bundle install
 ```
 
-And then execute:
+## usage
+Run `./bin/roku-remote`, it will search for a Roku device on your network.
 
-    $ bundle
+Key bindings:
+```
+        i               - info
+        h               - left arrow
+        j               - down arrow
+        l               - right arrow
+        k               - up arrow
+        /               - search
+        p                - power on
+        enter            - select
+        escape           - home screen (or cancel vi movement)
+        del              - back
+        0..n             - repeat next command N times
+        escape (after n) - cancel N command
+```
 
-Or install it yourself as:
+## caveats / todo
+- only works with the first Roku device it finds on your network.. I only have one device to tests against, unsure what happens otherwise
+- search functionality is implemented per Roku docs instructions, doesnt work though
+- need a insert mode for text fields
+- need to write tests
+- power off isn't documented.. -.- 
+- should highlight buttons on CLI screen when pressed
+- should highlight numeric keys when N command activated
 
-    $ gem install roku-remote
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/roku-remote.
+## other
+- [Roku External Control API.](https://sdkdocs.roku.com/display/sdkdoc/External+Control+Guide)
+- only tested on `ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15]`. probably doesn't work on windows from what I read.
 
