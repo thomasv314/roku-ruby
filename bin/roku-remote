@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'roku/device'
-require 'roku/remote'
-
+require 'roku'
 require 'pry'
 
 if ENV['DEBUG']

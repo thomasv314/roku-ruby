@@ -10,6 +10,8 @@ module Roku
         end.to_h.freeze
 
         CHAR_MAP = {
+          '=' => { name: 'Volume Up', action: :volume_up },
+          '-' => { name: 'Volume Down', action: :volume_down },
           'i' => { name: 'Info', action: :info },
           'h' => { name: 'Left Arrow', action: :left },
           'j' => { name: 'Down Arrow', action: :down },

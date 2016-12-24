@@ -2,13 +2,14 @@ module Roku
   class Remote
     class DeviceScanner
       def self.scan
-        button = Button.new(SEARCH_TEXT, {
-          left: '25%',
-          top: '33%',
-          height: '33%',
-          width: '50%'
-        }).paint
 
+        left = 25
+        top = 33
+        height = 33
+        width = 50
+
+        button = Button.new(SEARCH_TEXT, top, left, height, width)
+        button.paint
         device = false
         count = 0
 
@@ -20,10 +21,7 @@ module Roku
 
         button.update_text("Found Device!")
         sleep 1
-        button.clear
-        button.refresh
-        button.close
-
+        button.destroy
         device
       end
     end

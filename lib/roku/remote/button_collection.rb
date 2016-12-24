@@ -1,103 +1,51 @@
+require 'roku/remote/button_row'
+require 'pry-remote'
+
 module Roku
   class Remote
     class ButtonCollection
       attr_reader :buttons
 
-      def initialize
-        build_buttons
-      end
+      ROW_HEIGHT_DEFAULT = 20
+      NUM_ROW_TOP = 0
+      POWER_ROW_TOP = 20
+      MOVE_ROW_TOP = 40
 
       def paint
+        num_row.paint
+        power_row.paint
+        movement_row.paint
       end
 
-      def build_buttons
-        @buttons = {}
-        build_num_row
-        build_power_row
-        build_movement_row
-        buttons.each do |key, button|
-          button.paint
-        end
-      end
-
-      def build_num_row
+      def num_row
+        return @num_row if defined? @num_row
+        @num_row = ButtonRow.new(NUM_ROW_TOP, ROW_HEIGHT_DEFAULT)
         [*0..9].each do |num|
-          label = num + 1
-          label = 0 if label == 10
-          @buttons[num] = Button.new(label.to_s, {
-              left: "#{num * 10}%",
-              top: '0%',
-              width: '10%',
-              height: '10%'
-          })
+          label = (num + 1).to_s
+          @num_row.add(label.to_sym, label)
         end
+        @num_row
       end
 
-      def build_power_row
-        buttons[:home] = Button.new('HOME', {
-          left: '0%',
-          top: '10%',
-          width: '25%',
-          height: '20%'
-        }, 'esc')
-
-        buttons[:on] = Button.new('ON', {
-          left: '25%',
-          top: '10%',
-          width: '25%',
-          height: '20%'
-        }, 'P')
-
-        buttons[:info] = Button.new('INFO', {
-          left: '50%',
-          top: '10%',
-          width: '25%',
-          height: '20%'
-        }, 'i')
-
-        buttons[:back_btn] = Button.new('BACK', {
-          left: '75%',
-          top: '10%',
-          width: '25%',
-          height: '20%'
-        }, 'backspace')
+      def power_row
+        return @power_row if defined? @power_row
+        @power_row = ButtonRow.new(POWER_ROW_TOP, ROW_HEIGHT_DEFAULT)
+        @power_row.add(:left, 'HOME', 'esc')
+          .add(:on, 'ON', ?P)
+          .add(:info, 'INFO', ?i)
+          .add(:volume_down, 'VOL DOWN', ?-)
+          .add(:volume_up, 'VOL UP', ?=)
+          .add(:back_btn, 'BACK', 'backspace')
       end
 
-      def build_movement_row
-        buttons[:left] = Button.new('LEFT ARROW', {
-          left: '0%',
-          top: '30%',
-          width: '20%',
-          height: '20%'
-        }, 'h')
-
-        buttons[:down] = Button.new('DOWN ARROW', {
-          left: '20%',
-          top: '30%',
-          width: '20%',
-          height: '20%'
-        }, 'j')
-
-        buttons[:up] = Button.new('UP ARROW', {
-          left: '40%',
-          top: '30%',
-          width: '20%',
-          height: '20%'
-        }, 'k')
-
-        buttons[:right] = Button.new('RIGHT ARROW', {
-          left: '60%',
-          top: '30%',
-          width: '20%',
-          height: '20%'
-        }, 'l')
-
-        buttons[:select] = Button.new('OK', {
-          left: '80%',
-          top: '30%',
-          width: '20%',
-          height: '20%'
-        }, 'enter')
+      def movement_row
+        return @movement_row if defined? @movement_row
+        @movement_row = ButtonRow.new(MOVE_ROW_TOP, ROW_HEIGHT_DEFAULT)
+        @movement_row.add(:left, 'LEFT ARROW', ?h)
+          .add(:down, 'DOWN ARROW', ?j)
+          .add(:up, 'UP ARROW', ?k)
+          .add(:right, 'RIGHT ARROW', ?l)
+          .add(:select, 'OK', 'enter')
       end
     end
   end

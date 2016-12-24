@@ -11,21 +11,24 @@ module Roku
     ROKU = 'roku:ecp'.freeze
 
     ACTIONS = {
-      home: 'Home',     # Escape
+      home: 'Home',
       reverse: 'Rev',
       forward: 'Fwd',
       play: 'Play',
-      select: 'Select',  # ENTER
-      left: 'Left',      # GOT h
-      right: 'Right',    # GOT l
-      down: 'Down',      # GOT j
-      up: 'Up',          # GOT k
-      back: 'Back',      # GOT del
+      select: 'Select',
+      left: 'Left',
+      right: 'Right',
+      down: 'Down',
+      up: 'Up',
+      back: 'Back',
       replay: 'InstantReplay',
       info: 'Info',
       del: 'Backspace',
-      search: 'Search',  # GOT /
-      enter: 'Enter'     # TODO
+      search: 'Search',
+      enter: 'Enter',
+      volume_up: 'VolumeUp',
+      volume_down: 'VolumeDown',
+      volume_mute: 'VolumeMute'
     }.freeze
 
     attr_reader :location, :boot_info

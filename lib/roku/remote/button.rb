@@ -1,30 +1,35 @@
 module Roku
   class Remote
-    class Button < Curses::Window
-      attr_reader :dimensions, :text, :label
+    class Button # < Curses::Window
+      attr_reader :text, :label, :top, :left, :height, :width, :window
 
       LABEL_RIGHT_BUFFER = 2
 
-      def initialize(text_str, dimension_hash, label_str = nil)
-        @dimensions = dimension_hash
+      def initialize(text_str, top_p, left_p, height_p, width_p, label_str = nil)
+        @top = top_p
+        @left = left_p
+        @height = height_p
+        @width = width_p
         @text = text_str
         @label = label_str
-        compute_dimensions
-        super(@height, @width, @top, @left)
+        @window = Curses::Window.new(top, left, height, width)
       end
 
       def paint
-        clear
-        box(?|, ?-)
-        setpos((@height/2)-1, (@width/2 - (text.size/2)))
-        addstr(text)
+        window.clear
+        window.resize(computed_height, computed_width)
+        window.move(computed_top, computed_left)
+        window.box(?|, ?-)
+
+        window.setpos((computed_height/2)-1, (computed_width/2 - (text.size/2)))
+        window.addstr(text)
 
         if label
-          setpos(@height-2, @width-(label.length+LABEL_RIGHT_BUFFER))
-          addstr(label)
+          window.setpos(computed_height-2, computed_width- (label.length+LABEL_RIGHT_BUFFER))
+          window.addstr(label)
         end
-        refresh
-        self
+
+        window.refresh
       end
 
       def update_text(text_str)
@@ -32,24 +37,43 @@ module Roku
         paint
       end
 
-      def compute_dimensions
-        @dimensions = dimensions.map { |k,v| [k, v.gsub('%','').to_i] }.to_h
-        top_percent = dimensions[:top]
-        @top = top_percent * max_lines / 100
-        height_percent = dimensions[:height]
-        @height = height_percent * max_lines / 100
-        left_percent = dimensions[:left]
-        @left = left_percent * max_col / 100
-        width_percent = dimensions[:width]
-        @width = width_percent * max_col / 100
+      def update_dimensions(hash)
+        @top = hash[:top]
+        @left = hash[:left]
+        @height = hash[:height]
+        @width = hash[:width]
       end
 
-      def max_lines
-        Curses.lines
+      def destroy
+        window.clear
+        window.refresh
+        window.close
       end
 
-      def max_col
-        Curses.cols
+      private
+
+      def computed_height
+        y_axis(height)
+      end
+
+      def computed_top
+        y_axis(top)
+      end
+
+      def computed_left
+        x_axis(left)
+      end
+
+      def computed_width
+        x_axis(width)
+      end
+
+      def y_axis(percent_window_height)
+        percent_window_height * Curses.lines / 100
+      end
+
+      def x_axis(percent_window_width)
+        percent_window_width * Curses.cols / 100
       end
     end
   end

@@ -21,6 +21,8 @@ module Roku
     def start
       @device = DeviceScanner.scan
       attach_device_to_status_bar
+      status_bar.paint
+      button_collection.paint
       scan_for_keypresses
     end
 
@@ -31,8 +33,7 @@ module Roku
     def scan_for_keypresses
       loop do
         begin
-          button_collection.paint
-          keypressed = status_bar.getch
+          keypressed = status_bar.window.getch
           status_bar.pressed(keypressed)
         rescue => ex
           Curses.close_screen
@@ -42,7 +43,7 @@ module Roku
     end
 
     def status_bar
-      @status_bar ||= StatusBar.new.paint
+      @status_bar ||= StatusBar.new
     end
 
     def button_collection

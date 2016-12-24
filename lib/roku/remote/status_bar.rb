@@ -3,10 +3,10 @@ require 'roku/remote/controller'
 module Roku
   class Remote
     class StatusBar < Button
-      WIDTH = '100%'.freeze
-      HEIGHT = '10%'.freeze
-      TOP = '90%'.freeze
-      LEFT = '0%'.freeze
+      WIDTH = 100.freeze
+      HEIGHT = 10.freeze
+      TOP = 90.freeze
+      LEFT = 0.freeze
 
       attr_reader :controller
 
@@ -19,7 +19,7 @@ module Roku
           top: TOP,
           left: LEFT
         }
-        super(@text, @dimensions)
+        super(@text, TOP, LEFT, HEIGHT, WIDTH)
       end
 
       def set_device(device)
