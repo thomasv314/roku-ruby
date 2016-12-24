@@ -3,8 +3,7 @@ require 'roku/remote/controller/key_press'
 module Roku
   class Remote
     class Controller
-      DEFAULT_MODE = :default.freeze
-      TIMES_MODE = :times.freeze
+      MAX = 100 # prevent j9999 from DoS'ing your roku device ¯\_(ツ)_/¯
 
       def initialize
         @repeat_action_times = nil
@@ -39,6 +38,9 @@ module Roku
         else
           @repeat_action_times = "#{@repeat_action_times.to_s}#{keypress.number.to_s}".to_i
         end
+
+        @repeat_action_times = MAX if repeat_action_times > MAX
+
         "#{@repeat_action_times} TIMES"
       end
 
