@@ -17,6 +17,7 @@ module Roku
 
       def paint
         window.clear
+
         window.resize(computed_height, computed_width)
         window.move(computed_top, computed_left)
         window.box(?|, ?-)
